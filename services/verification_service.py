@@ -1,26 +1,26 @@
 from services.image_processor import ImageProcessor
 from services.claude_service import ClaudeService
-from schemas import VerificationRequest, VerificationResponse
+from schemas import ClassificationRequest, ClassificationResponse
 
-class VerificationService:
+class ClassificationService:
     def __init__(self):
         self.image_processor = ImageProcessor()
         self.claude_service = ClaudeService()
 
-    async def verify_photos(self, request: VerificationRequest) -> VerificationResponse:
+    async def classify_photos(self, request: ClassificationRequest) -> ClassificationResponse:
         try:
             # Process images
             image_contents = await self.image_processor.prepare_images(request.photos)
             
-            # Get verification from Claude
-            result = await self.claude_service.verify_photos(request.task, image_contents)
+            # Get classification from Claude
+            result = await self.claude_service.classify_photos(request.task, image_contents)
             
-            return VerificationResponse(
-                verified=result["verified"],
+            return ClassificationResponse(
+                classified=result["classified"],
                 reason=result["reason"]
             )
         except Exception as e:
-            return VerificationResponse(
-                verified=False,
+            return ClassificationResponse(
+                classified=False,
                 reason=f"Error processing request: {str(e)}"
             )

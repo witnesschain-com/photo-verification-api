@@ -14,14 +14,14 @@ class ClaudeService:
         message_content = [
             {
                 "type": "text",
-                "text": f"Please verify if these photos satisfy the following task: {task}\n"
-                "Respond with JSON only in this format: {{\"verified\": boolean, \"reason\": string}}"
+                "text": f"Please classify if these photos satisfy the following task: {task}\n"
+                "Respond with JSON only in this format: {{\"classified\": boolean, \"reason\": string}}"
             }
         ]
         message_content.extend(image_contents)
         return message_content
 
-    async def verify_photos(self, task: str, image_contents: List[Dict]) -> Dict:
+    async def classify_photos(self, task: str, image_contents: List[Dict]) -> Dict:
         message_content = self.prepare_message_content(task, image_contents)
         
         response = self.client.messages.create(

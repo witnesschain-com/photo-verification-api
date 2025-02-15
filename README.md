@@ -1,13 +1,13 @@
-# FastAPI Photo Verification API
+# FastAPI Photo Classification API
 
 ## 📌 Overview
-This FastAPI-based service provides an endpoint for verifying whether uploaded photos satisfy a given task using **Claude** AI. It accepts a list of image files along with a task description and returns a JSON response with verification results.
+This FastAPI-based service provides an endpoint for classifying whether uploaded photos satisfy a given task using **Claude** AI. It accepts a list of image files along with a task description and returns a JSON response with classification results.
 
 ## 🚀 Features
-- ✅ Accepts multiple image uploads for verification
+- ✅ Accepts multiple image uploads for classification
 - 🔍 Uses Claude AI to analyze photos against a given task
 - 📡 FastAPI-based for lightweight and scalable deployment
-- 📤 Returns structured JSON response with verification results and reasoning
+- 📤 Returns structured JSON response with classification results and reasoning
 
 ## 📦 Installation & Setup
 
@@ -35,22 +35,22 @@ The API will be available at `http://localhost:8000`.
 
 ## 🔗 API Reference
 
-### **Verify Photos**
-**Endpoint:** `POST /verify-photos/`
+### **Classify Photos**
+**Endpoint:** `POST /classify-photos/`
 
 **Description:**
-Verifies if the uploaded photos meet the specified task requirements using Claude AI.
+Classifies if the uploaded photos meet the specified task requirements using Claude AI.
 
 #### **Request Parameters**
 | Parameter  | Type               | Description |
 |------------|------------------|-------------|
 | `task`     | `string`          | Description of what the photos should show/contain |
-| `photos`   | `List[UploadFile]` | List of image files to verify |
+| `photos`   | `List[UploadFile]` | List of image files to classify |
 
 #### **Request Example** (cURL)
 ```bash
 curl -X 'POST' \
-  'http://localhost:8000/verify-photos/' \
+  'http://localhost:8000/classify-photos/' \
   -F 'task="Show a sunset over the ocean"' \
   -F 'photos=@image1.jpg' \
   -F 'photos=@image2.jpg'
@@ -69,7 +69,7 @@ curl -X 'POST' \
 .
 ├── main.py                  # FastAPI app entry point
 ├── services/
-│   ├── verification_service.py  # Handles photo verification logic
+│   ├── classification_service.py  # Handles photo classification logic
 ├── schemas.py               # Defines request and response schemas
 ├── requirements.txt         # Dependencies
 └── README.md                # API Documentation

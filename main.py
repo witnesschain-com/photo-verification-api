@@ -1,25 +1,25 @@
 from fastapi import FastAPI, File, UploadFile
 from typing import List
-from services.verification_service import VerificationService
-from schemas import VerificationRequest, VerificationResponse
+from services.verification_service import ClassificationService
+from schemas import ClassificationRequest, ClassificationResponse
 
 app = FastAPI()
-verification_service = VerificationService()
+verification_service = ClassificationService()
 
-@app.post("/verify-photos/", response_model=VerificationResponse)
-async def verify_photos(
+@app.post("/classify-photos/", response_model=ClassificationResponse)
+async def classify_photos(
     task: str,
     photos: List[UploadFile] = File(...)
-) -> VerificationResponse:
+) -> ClassificationResponse:
     """
-    Verify if uploaded photos satisfy the given task using Claude
+    classify if uploaded photos satisfy the given task using Claude
     
     Args:
         task: Description of what the photos should show/contain
-        photos: List of image files to verify
+        photos: List of image files to classify
     
     Returns:
         JSON response with verification result and reason
     """
-    request = VerificationRequest(task=task, photos=photos)
-    return await verification_service.verify_photos(request)
+    request = ClassificationRequest(task=task, photos=photos)
+    return await verification_service.classify_photos(request)
