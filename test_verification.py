@@ -4,7 +4,7 @@ from pathlib import Path
 
 def test_photo_verification(image_paths=['IMG_1347.jpeg', 'IMG_1348.jpeg']):
     # API endpoint URL
-    url = "http://localhost:8000/verify-photos/"
+    url = "http://localhost:8000/classify-photos/"
     
     try:
         # Open files and create MultipartEncoder
